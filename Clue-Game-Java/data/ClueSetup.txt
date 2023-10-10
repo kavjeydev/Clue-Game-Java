@@ -1,0 +1,25 @@
+//Rooms and room cards
+Room, Conservatory, C
+Room, Kitchen, K
+Room, Study, S
+Room, Dining Room, D
+Room, Library, L
+Room, Lounge, O
+Room, Hall, H
+Room, Ballroom, B2
+Room, Billiard Room, R
+Weapon, Flamethrower
+Weapon, Jumper Cables
+Weapon, Guillotine
+Weapon, Sledgehammer
+Weapon, Car
+Weapon, Broom
+Person, Mark Baldwin
+Person, Ben Keefe
+Person, Kavin Jeyasankar
+Person, PCJ
+Person, Some Guy
+Person, A Dog
+//Other spaces on board
+Space, Unused, X
+Space, Walkway, W

@@ -1,0 +1,199 @@
+commit 9047231e6db9876c4489ad09cccf833fe7839d67
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 21:17:02 2022 -0600
+
+    Removed some unused variables and added blank space to make code more readable
+
+commit d642adba5789f15b5a17d3a091f65a75e8c1946b
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 21:01:51 2022 -0600
+
+    Changed a few nested if-statements and made them one if statement for more confined and easier to read code
+
+commit 3657e7c58553de285efb8487bd0a89012d92d532
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:58:39 2022 -0600
+
+    Getters and setters organized, making code more readable
+
+commit 43ee434a107cd5720b6460dfa8fe25b0001f59f8
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:52:40 2022 -0600
+
+    No strings are initialized to empty
+
+commit ce1d9228c44c9668f04401115ec36b1de0b679bf
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:49:39 2022 -0600
+
+    Removed unused imports from all classes
+
+commit c08b618d51523bbb65812476eb7032273863e0a1
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:45:06 2022 -0600
+
+    Comments added in the excpetion file explaining what each exception message is
+
+commit 57bd056f634705f14a223555baed122f163a0653
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:41:28 2022 -0600
+
+    The rows and columns are calculated based on the grid array instead of being a constant.
+
+commit 88588d55c78c2f6f7e8fee26ed5ac42579596072
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Mar 11 01:52:14 2022 -0700
+
+    All C16A tests pass (adjacency and targeting)
+
+commit cbbd0240f918993aa19ada0b3f56b079103f9475
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Thu Mar 10 20:24:06 2022 -0700
+
+    Tests close to passing
+
+commit 55b041910babcbf8513d00bbeafdd32524e2c3c1
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Tue Mar 8 15:23:47 2022 -0700
+
+    board target tests fail without error
+
+commit 658c86a2304953f5081e11adbaf1736593070a3b
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Mon Mar 7 20:22:28 2022 -0700
+
+    added movement/target tests, all fail without error
+
+commit 4d816f37af286a81bb1f3d93fd151b96b40bb2d8
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Mon Mar 7 18:22:08 2022 -0700
+
+    all tests pass
+
+commit 37faf6ba028fd1a260ebaf00dde9d03ff5b072f7
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Mon Mar 7 17:35:16 2022 -0700
+
+    all tests pass for FileInitTests
+
+commit a3ed8a7b8cc255e0d3bc5552c93675f9a3a74f7b
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 14:15:08 2022 -0700
+
+    All tests pass but 4 lines
+
+commit 68aa5824dab463007601fd97876e2d36e2f35073
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 14:10:03 2022 -0700
+
+    Most tests pass
+
+commit ae249244fc319495bd1bc16dd0e365350778040e
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 13:35:56 2022 -0700
+
+    Four tests pass
+
+commit 5012972ac3b708d01320154c65180479c0d3a110
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 13:19:00 2022 -0700
+
+    3 tests pass
+
+commit 0b6013cb200ab6b3b689b306e6fd8f0107d90cab
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 11:44:21 2022 -0700
+
+    Passes two tests
+
+commit 02ac6e458735f06086fb9bfa1e8889cbe0e4b2d2
+Merge: cc23768 700f75e
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 11:38:35 2022 -0700
+
+    Merge branch 'master' of https://github.com/bkeefe313/Clue_CSCI306
+
+commit cc23768605f38074faf58d35b9c92c60aa6db7cb
+Merge: b400cce 6523497
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Sun Mar 6 23:45:09 2022 -0700
+
+    test
+
+commit 700f75e22016d98ba2c818807a04db5f9472c3b0
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Mar 4 19:53:57 2022 -0700
+
+    made tests applicable to our project and added necessary 306 files
+
+commit 898bf6378b6dfb01e5442c7e4b02f74cc78a1fb9
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Mar 4 19:11:52 2022 -0700
+
+    added data directory
+
+commit b400ccec147ccbd351b21b20ecac28ca5d5d0b74
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Fri Mar 4 16:51:33 2022 -0700
+
+    Added stub classes
+
+commit 5c86545f4e5a145ee866f81bf8547972694c4724
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 3 15:03:17 2022 -0700
+
+    all adjacency and path tests pass
+
+commit 86be935afa04eb0ca4166ce2aec1e2b60980d762
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 3 14:05:43 2022 -0700
+
+    added comments
+
+commit f4b6c0e4972f268645c54f5effac72e3c3e48ecf
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 3 13:50:54 2022 -0700
+
+    Refactored adjacency calculations to be done entirely within the TestBoard class
+
+commit 2c0f43080166b6cb1c3d3ae755e471b029dce4fc
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 3 13:40:21 2022 -0700
+
+    BoardTestsExp tests fail without errors (testAdjacency succeeds)
+
+commit 5cba97a1d6ad17e3307ba07587e180074223870c
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Tue Mar 1 15:16:31 2022 -0700
+
+    Fixing failures with adding adjacencies
+
+commit 3deca1460075a7a8ec9a7e2ff024a46bb5c4b4f3
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Feb 28 19:19:24 2022 -0700
+
+    added comments
+
+commit ed373567de6c51a769e685d884a2cda8ea4ac471
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Feb 28 19:15:29 2022 -0700
+
+    All tests fail without error
+
+commit 0e0a6227224c4b23e8a8b73227287569740698ab
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Feb 24 15:27:39 2022 -0700
+
+    added C13A-2 files, need to fix Unit test errors
+
+commit 0af9a500cf23034d70253beaf23b1960f54af6a4
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Feb 24 14:51:10 2022 -0700
+
+    initial
+
+commit 65234977f15ba831726b0c482d3d7dd338323423
+Author: Ben Keefe <35708143+bkeefe313@users.noreply.github.com>
+Date:   Thu Feb 24 14:24:56 2022 -0700
+
+    Initial commit

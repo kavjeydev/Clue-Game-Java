@@ -1,0 +1,371 @@
+commit b4efa66c504e5442a40b9babf81853d5b950372d
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Apr 15 16:10:33 2022 -0600
+
+    Player movement and next turn logic complete
+
+commit 57061ee854bff60fb5e5b883dcd902e7600d0a16
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Wed Apr 13 21:41:32 2022 -0600
+
+    target squares highlight gray
+
+commit 310026242a91e1c13ecd81df501f4c418efc32ad
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Tue Apr 12 15:15:38 2022 -0600
+
+    board click events being worked on
+
+commit 69c0da4b01385843e8306363777fd21522f0e150
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Apr 11 14:41:12 2022 -0600
+
+    Finished adding rooms
+
+commit aa41d655620a36cba981edd76d96dd7c9fceb9dc
+Merge: 23d4d20 080655f
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Apr 11 11:54:25 2022 -0600
+
+    merge
+
+commit 23d4d20f559738d5d3f779031ba370f75a185a42
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Apr 11 11:53:23 2022 -0600
+
+    merge
+
+commit 2099558dd6df9b70fff924cfb9490e3ceb99a222
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Apr 11 11:51:45 2022 -0600
+
+    merge
+
+commit 080655fcab98fa30cfac34af10ebdb4772f14769
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Sun Apr 10 18:40:09 2022 -0600
+
+    board gets drawn, room labels drawn, need door indicators
+
+commit 358fc9a974727d93383c5a32d136c6b090787e53
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Apr 7 16:22:46 2022 -0600
+
+    Card Panel working properlu
+
+commit 73afb80c9b22ded149465ebf9af2567da30474ce
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Thu Apr 7 15:16:17 2022 -0600
+
+    Class Panel GUI work in progress
+
+commit f304cfad23857cc0248784ce5129ca326a010602
+Merge: 20e313e ee7e534
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Wed Apr 6 19:31:13 2022 -0600
+
+    Merge branch 'master' of https://github.com/bkeefe313/Clue_CSCI306
+
+commit ee7e53492ec5a7476a2bb779d11d301e634d6c1a
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Wed Apr 6 18:15:16 2022 -0600
+
+    started GUI
+
+commit 20e313ea0f8e67ddd202464a086cd12f24187fba
+Merge: efeb2d5 aca997c
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Wed Apr 6 17:14:59 2022 -0600
+
+    Merge branch 'master' of https://github.com/bkeefe313/Clue_CSCI306
+
+commit efeb2d58a3a3086c8e2acf26cadd10c7874b9f61
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Wed Apr 6 17:14:55 2022 -0600
+
+    merge problem
+
+commit aca997c9083349ae73ad0c63db4aca285fbb6254
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Tue Apr 5 14:12:46 2022 -0600
+
+    fixed selectTarget to follow encapsulation
+
+commit 94b3b097377c6ddc87a478a498eddd4ddabd8d1c
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Mon Apr 4 22:09:43 2022 -0600
+
+    computer player target test passes
+
+commit 0efc268a0b13071b7c85fae93f24886aafd445e1
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Mon Apr 4 20:46:58 2022 -0600
+
+    all current tests pass
+
+commit f7b1423a5c272e251d561a3b227e3b7a797938ab
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Apr 4 00:35:35 2022 -0600
+
+    Game Solution Tests all pass
+
+commit 334dba07dcc4d0f1eaaa228494ec96e7d17a697d
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Fri Apr 1 17:31:59 2022 -0600
+
+    Game solution tests implemented and fail without error
+
+commit 28aa076f1dd2b17259d42c76476b8da2fde75d93
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Fri Apr 1 17:29:28 2022 -0600
+
+    Most tests written, AI target test not writte
+
+commit c926e14e48b28149b89b5529dc1b74f4558efce5
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Apr 1 01:47:50 2022 -0600
+
+    readme & gitlog file
+
+commit 019e18de0344855c27e86610be502e683cf106c1
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Apr 1 01:46:48 2022 -0600
+
+    added color to player constructor and made solution class
+
+commit 80ed87704f438eed82ded2995156c5a7c0ef2d26
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Apr 1 01:37:56 2022 -0600
+
+    GameSetupTests pass
+
+commit b631382ccc5f07a74a58b0f39f40aa47dce3a63f
+Merge: 711df37 ea9f7ba
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Thu Mar 31 15:17:56 2022 -0600
+
+    merge resolved
+
+commit 711df37d0371afad4fecb3392a7befb90e5f4dc4
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Thu Mar 31 15:16:35 2022 -0600
+
+    Working on deal method
+
+commit ea9f7ba0d6edfae4bb94afef6bf0038cb12164f7
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 31 14:14:41 2022 -0600
+
+    tests fail without error
+
+commit 955560194f09d6a5e08e9f13b77870fd1965bff9
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Wed Mar 30 22:42:10 2022 -0600
+
+    TestPlayers passes with shell code
+
+commit bbf1fba67e5bc5b83056c78b2752d3dc92a1a37c
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Tue Mar 29 15:13:36 2022 -0600
+
+    tests error only off of init problems
+
+commit 9047231e6db9876c4489ad09cccf833fe7839d67
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 21:17:02 2022 -0600
+
+    Removed some unused variables and added blank space to make code more readable
+
+commit d642adba5789f15b5a17d3a091f65a75e8c1946b
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 21:01:51 2022 -0600
+
+    Changed a few nested if-statements and made them one if statement for more confined and easier to read code
+
+commit 3657e7c58553de285efb8487bd0a89012d92d532
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:58:39 2022 -0600
+
+    Getters and setters organized, making code more readable
+
+commit 43ee434a107cd5720b6460dfa8fe25b0001f59f8
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:52:40 2022 -0600
+
+    No strings are initialized to empty
+
+commit ce1d9228c44c9668f04401115ec36b1de0b679bf
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:49:39 2022 -0600
+
+    Removed unused imports from all classes
+
+commit c08b618d51523bbb65812476eb7032273863e0a1
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:45:06 2022 -0600
+
+    Comments added in the excpetion file explaining what each exception message is
+
+commit 57bd056f634705f14a223555baed122f163a0653
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 14 20:41:28 2022 -0600
+
+    The rows and columns are calculated based on the grid array instead of being a constant.
+
+commit 88588d55c78c2f6f7e8fee26ed5ac42579596072
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Mar 11 01:52:14 2022 -0700
+
+    All C16A tests pass (adjacency and targeting)
+
+commit cbbd0240f918993aa19ada0b3f56b079103f9475
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Thu Mar 10 20:24:06 2022 -0700
+
+    Tests close to passing
+
+commit 55b041910babcbf8513d00bbeafdd32524e2c3c1
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Tue Mar 8 15:23:47 2022 -0700
+
+    board target tests fail without error
+
+commit 658c86a2304953f5081e11adbaf1736593070a3b
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Mon Mar 7 20:22:28 2022 -0700
+
+    added movement/target tests, all fail without error
+
+commit 4d816f37af286a81bb1f3d93fd151b96b40bb2d8
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Mon Mar 7 18:22:08 2022 -0700
+
+    all tests pass
+
+commit 37faf6ba028fd1a260ebaf00dde9d03ff5b072f7
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Mon Mar 7 17:35:16 2022 -0700
+
+    all tests pass for FileInitTests
+
+commit a3ed8a7b8cc255e0d3bc5552c93675f9a3a74f7b
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 14:15:08 2022 -0700
+
+    All tests pass but 4 lines
+
+commit 68aa5824dab463007601fd97876e2d36e2f35073
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 14:10:03 2022 -0700
+
+    Most tests pass
+
+commit ae249244fc319495bd1bc16dd0e365350778040e
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 13:35:56 2022 -0700
+
+    Four tests pass
+
+commit 5012972ac3b708d01320154c65180479c0d3a110
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 13:19:00 2022 -0700
+
+    3 tests pass
+
+commit 0b6013cb200ab6b3b689b306e6fd8f0107d90cab
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 11:44:21 2022 -0700
+
+    Passes two tests
+
+commit 02ac6e458735f06086fb9bfa1e8889cbe0e4b2d2
+Merge: cc23768 700f75e
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Mar 7 11:38:35 2022 -0700
+
+    Merge branch 'master' of https://github.com/bkeefe313/Clue_CSCI306
+
+commit cc23768605f38074faf58d35b9c92c60aa6db7cb
+Merge: b400cce 6523497
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Sun Mar 6 23:45:09 2022 -0700
+
+    test
+
+commit 700f75e22016d98ba2c818807a04db5f9472c3b0
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Mar 4 19:53:57 2022 -0700
+
+    made tests applicable to our project and added necessary 306 files
+
+commit 898bf6378b6dfb01e5442c7e4b02f74cc78a1fb9
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Fri Mar 4 19:11:52 2022 -0700
+
+    added data directory
+
+commit b400ccec147ccbd351b21b20ecac28ca5d5d0b74
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Fri Mar 4 16:51:33 2022 -0700
+
+    Added stub classes
+
+commit 5c86545f4e5a145ee866f81bf8547972694c4724
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 3 15:03:17 2022 -0700
+
+    all adjacency and path tests pass
+
+commit 86be935afa04eb0ca4166ce2aec1e2b60980d762
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 3 14:05:43 2022 -0700
+
+    added comments
+
+commit f4b6c0e4972f268645c54f5effac72e3c3e48ecf
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 3 13:50:54 2022 -0700
+
+    Refactored adjacency calculations to be done entirely within the TestBoard class
+
+commit 2c0f43080166b6cb1c3d3ae755e471b029dce4fc
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Mar 3 13:40:21 2022 -0700
+
+    BoardTestsExp tests fail without errors (testAdjacency succeeds)
+
+commit 5cba97a1d6ad17e3307ba07587e180074223870c
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Tue Mar 1 15:16:31 2022 -0700
+
+    Fixing failures with adding adjacencies
+
+commit 3deca1460075a7a8ec9a7e2ff024a46bb5c4b4f3
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Feb 28 19:19:24 2022 -0700
+
+    added comments
+
+commit ed373567de6c51a769e685d884a2cda8ea4ac471
+Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
+Date:   Mon Feb 28 19:15:29 2022 -0700
+
+    All tests fail without error
+
+commit 0e0a6227224c4b23e8a8b73227287569740698ab
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Feb 24 15:27:39 2022 -0700
+
+    added C13A-2 files, need to fix Unit test errors
+
+commit 0af9a500cf23034d70253beaf23b1960f54af6a4
+Author: bkeefe313 <bkeefe313@gmail.com>
+Date:   Thu Feb 24 14:51:10 2022 -0700
+
+    initial
+
+commit 65234977f15ba831726b0c482d3d7dd338323423
+Author: Ben Keefe <35708143+bkeefe313@users.noreply.github.com>
+Date:   Thu Feb 24 14:24:56 2022 -0700
+
+    Initial commit

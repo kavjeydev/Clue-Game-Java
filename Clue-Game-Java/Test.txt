@@ -1,0 +1,10 @@
+For FourDoorDirections()...
+Door tiles were selected making sure the directions matched
+
+For testRooms()...
+first test tests a tile in the library
+second tests the library label cell
+third is center of the hall
+fourth is the passage in the top left from Study to Observatory
+fifth tests a walkway
+sixth is an unused cell at the bottom of the board

@@ -1,0 +1,13 @@
+//Rooms and room cards
+Room, Conservatory, C
+Room, Kitchen, K
+Room, Study, S
+Room, Dining Room, D
+Room, Library, L
+Room, Lounge, O
+Room, Hall, H
+Room, Ballroom, B
+Room, Billiard Room, R
+//Other spaces on board
+Space, Unused, X
+Space, Walkway, W

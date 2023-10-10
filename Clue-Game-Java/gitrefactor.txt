@@ -1,0 +1,756 @@
+A very large refactoring operation was done right before getting all tests to pass, so
+this git diff was not from the end, but rather from closer to the beginning of the
+assignment
+
+diff --git a/data/ClueSetup.txt b/data/ClueSetup.txt
+index b7b3061..26b7cbc 100644
+--- a/data/ClueSetup.txt
++++ b/data/ClueSetup.txt
+@@ -6,8 +6,8 @@ Room, Dining Room, D
+ Room, Library, L
+ Room, Lounge, O
+ Room, Hall, H
+-Room, Ballroom, B
+-Room, Billard Room, R
++Room, Ballroom, B2
++Room, Billiard Room, R
+ //Other spaces on board
+ Space, Unused, X
+ Space, Walkway, W
+\ No newline at end of file
+diff --git a/gitlog.txt b/gitlog.txt
+index 291385b..ba4e8d1 100644
+--- a/gitlog.txt
++++ b/gitlog.txt
+@@ -1,3 +1,21 @@
++commit 700f75e22016d98ba2c818807a04db5f9472c3b0
++Author: bkeefe313 <bkeefe313@gmail.com>
++Date:   Fri Mar 4 19:53:57 2022 -0700
++
++    made tests applicable to our project and added necessary 306 files
++
++commit 898bf6378b6dfb01e5442c7e4b02f74cc78a1fb9
++Author: bkeefe313 <bkeefe313@gmail.com>
++Date:   Fri Mar 4 19:11:52 2022 -0700
++
++    added data directory
++
++commit b400ccec147ccbd351b21b20ecac28ca5d5d0b74
++Author: Kavin Jeyasankar <kjeyasankar@mines.edu>
++Date:   Fri Mar 4 16:51:33 2022 -0700
++
++    Added stub classes
++
+ commit 5c86545f4e5a145ee866f81bf8547972694c4724
+ Author: bkeefe313 <bkeefe313@gmail.com>
+ Date:   Thu Mar 3 15:03:17 2022 -0700
+diff --git a/src/clueGame/Board.java b/src/clueGame/Board.java
+index e1ad68b..731e4af 100644
+--- a/src/clueGame/Board.java
++++ b/src/clueGame/Board.java
+@@ -1,27 +1,82 @@
+ package clueGame;
+ 
+-import java.io.DataInputStream;
+-import java.io.FileInputStream;
++import java.io.File;
+ import java.io.FileNotFoundException;
+-import java.io.IOException;
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-import Experiment.TestBoard;
+-import Experiment.TestBoardCell;
++import java.util.HashMap;
++import java.util.HashSet;
++import java.util.Iterator;
++import java.util.Map;
++import java.util.Scanner;
++import java.util.Set;
+ 
+ public class Board {	
+-	private TestBoardCell[][] grid;
+-	private String[][] stringGrid;
++	//constants
++	public static final int NUM_ROWS = 25;
++	public static final int NUM_COLS = 24;
++	
++	//lists and board data
++	private BoardCell[][] grid;
++	private String[][] symbolGrid;
++	private Map<Character, Room> symbolRoomMap;
++	
++	private Set<BoardCell> targets;
++	private Set<BoardCell> visited;
++	
+ 	private static Board instance = new Board();
++	
+ 	private String csv = "";
+-	private String txt = "";
+-	private int row = 0;
+-	private int col = 0;
++	private String setup = "";
+ 	
+     // constructor is private to ensure only one can be created
+     private Board() {
+-           super() ;
++    	super();
++    	symbolRoomMap = new HashMap<Character, Room>();
++    	symbolGrid = new String[NUM_ROWS][NUM_COLS];
++    	grid = new BoardCell[NUM_ROWS][NUM_COLS];
++    	
++    	targets = new HashSet<BoardCell>();
++		visited = new HashSet<BoardCell>();
++		
++		//create board grid of cells
++		for(int i = 0; i < NUM_ROWS; i++) {
++			for(int j = 0; j < NUM_COLS; j++) {
++				grid[i][j] = new BoardCell(i, j);;
++			}
++		}
++		
++		//calculate cell adjacencies
++		for(int i = 0; i < NUM_ROWS; i++) {
++			for(int j = 0; j < NUM_COLS; j++) {
++				
++				//check left
++				if(i > 0) {
++					 if(!grid[i - 1][j].getOccupied()) {
++						 grid[i][j].addAdjacency(grid[i - 1][j]);
++					 }
++				 }
++
++				//check up
++				 if(j > 0) {
++					 if(!grid[i][j - 1].getOccupied()) {
++						 grid[i][j].addAdjacency(grid[i][j - 1]);
++					 }
++				 }
++				 
++				 //check right
++				 if(i + 1 < NUM_ROWS) {
++					 if(!grid[i + 1][j].getOccupied()) {
++						 grid[i][j].addAdjacency(grid[i + 1][j]);
++					 }
++				 }
++
++				 //check down
++				 if(j + 1 < NUM_COLS) {
++					 if(!grid[i][j + 1].getOccupied()) {
++						 grid[i][j].addAdjacency(grid[i][j + 1]);
++					 }
++				 }
++			}
++		}
+     }
+     
+     // this method returns the only Board
+@@ -32,150 +87,117 @@ public class Board {
+     /*
+      * initialize the board (since we are using singleton pattern)
+      */
+-    public void initialize() throws IOException {
+-    	String line = "";
+-    	FileInputStream fis = new FileInputStream(csv);
+-    	DataInputStream myInput = new DataInputStream(fis);
+-    	List<String[]> lines = new ArrayList<String[]>();
+-    	while ((line = myInput.readLine()) != null) {
+-    	     lines.add(line.split(","));
+-    	}
+-
+-    	String[][] array = new String[lines.size()][0];
+-    	lines.toArray(array);
+-    	
+-    	stringGrid = array;
+-    	
+-    	
++    public void initialize() {
++    	loadSetupConfig();
++    	loadLayoutConfig();
+     }
+     
+-	public void setConfigFiles(String string, String string2) {
+-		csv = string;
+-		txt = string2;
+-		
++	public void setConfigFiles(String csv, String setup) {
++		this.csv = csv;
++		this.setup = setup;
+ 	}
+ 	
+ 	public String getCurrentLocation(int row, int col) {
+-		return stringGrid[row][col];
++		return symbolGrid[row][col];
+ 	}
+ 	
++	/*
++	 * returns room associated with a label character, if one exists
++	 * otherwise, returns null
++	 */
+ 	public Room getRoom(char c) {
+-		// TODO Auto-generated method stub
+-		if(c == 'O')
+-			return new Room("Lounge");
+-		else if(c == 'C') {
+-			return new Room("Conservatory");
+-		}
+-		else if(c == 'K') {
+-			return new Room("Kitchen");
+-		}
+-		else if(c == 'S') {
+-			return new Room("Study");
+-		}
+-		else if(c == 'D') {
+-			return new Room("Dining Room");
+-		}
+-		else if(c == 'L') {
+-			return new Room("Library");
+-		}
+-		else if(c == 'H') {
+-			return new Room("Hall");
++		for(Map.Entry<Character, Room> pair : symbolRoomMap.entrySet()) {
++			if(pair.getValue().getLabel() == c)
++				return pair.getValue();
+ 		}
+-		else if(c == 'B') {
+-			return new Room("Ballroom");
+-		}
+-		else if(c == 'R') {
+-			return new Room("Billiard Room");
+-		}
+-		else if(c == 'W') {
+-			return new Room("Walkway");
+-		}
+-		else if(c == 'X') {
+-			return new Room("Unused");
+-		}
+-		
+-		return new Room("Lounge");
+-		
++		return null;
+ 	}
+ 	
+ 	public int getNumRows() {
+-		// TODO Auto-generated method stub
+-		return 25;
++		return Board.NUM_ROWS;
+ 	}
+ 	
+ 	public int getNumColumns() {
+-		// TODO Auto-generated method stub
+-		return 24;
++		return Board.NUM_COLS;
+ 	}
+ 	
+ 	public BoardCell getCell(int i, int j) {
+-		// TODO Auto-generated method stub
+-		this.row = i;
+-		this.col = j;
+-		return new BoardCell(i, j);
+-	}
+-	
+-	public Room getRoom(BoardCell cell) {
+-		Board board = Board.getInstance();
+-		if(board.getCurrentLocation(row, col).equals("K")
+-				|| board.getCurrentLocation(row, col).equals("K#")
+-				|| board.getCurrentLocation(row, col).equals("K*")) {
+-			return new Room("Kitchen");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("O") 
+-				|| board.getCurrentLocation(row, col).equals("O#")
+-				|| board.getCurrentLocation(row, col).equals("O*")) {
+-			return new Room("Lounge");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("B")
+-				|| board.getCurrentLocation(row, col).equals("B#")
+-				|| board.getCurrentLocation(row, col).equals("B*")) {
+-			return new Room("Ballroom");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("S")
+-				|| board.getCurrentLocation(row, col).equals("S#")
+-				|| board.getCurrentLocation(row, col).equals("S*")) {
+-			return new Room("Study");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("H")
+-				|| board.getCurrentLocation(row, col).equals("H#")
+-				|| board.getCurrentLocation(row, col).equals("H*")) {
+-			return new Room("Hall");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("R")
+-				|| board.getCurrentLocation(row, col).equals("R#")
+-				|| board.getCurrentLocation(row, col).equals("R*")) {
+-			return new Room("Billiard Room");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("D")
+-				|| board.getCurrentLocation(row, col).equals("D#")
+-				|| board.getCurrentLocation(row, col).equals("D*")) {
+-			return new Room("Dining Room");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("C")
+-				|| board.getCurrentLocation(row, col).equals("C#")
+-				|| board.getCurrentLocation(row, col).equals("C*")) {
+-			return new Room("Conservatory");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("L")
+-				|| board.getCurrentLocation(row, col).equals("L#")
+-				|| board.getCurrentLocation(row, col).equals("L*")) {
+-			return new Room("Library");
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("W")) {
+-			return new Room("Walkway");
+-		}
+-		
+-		return new Room();
++		return grid[i][j];
+ 	}
+ 	
++	/*
++	 * load setup file and create rooms based on contents
++	 */
+ 	public void loadSetupConfig() {
+-		// TODO Auto-generated method stub
++		Scanner inFile;
++		
++		try {
++    		inFile = new Scanner(new File(setup));
++    	} catch(FileNotFoundException err) {
++    		System.out.println("Input file for setup not found");
++    		return;
++    	}
++    	
++    	while(inFile.hasNextLine()) {
++    		String line = inFile.nextLine();
++    		String[] splitLine;
++    		if(!line.substring(0, 2).equals("//")) {
++    			splitLine = line.split(", ");
++				Room room = new Room(splitLine[1], splitLine[2].charAt(0));
++				symbolRoomMap.put(room.getLabel(), room);
++    		}
++    	}
++    	
++    	inFile.close();
+ 		
+ 	}
+ 
++	/*
++	 * load layout file and set up board from contents
++	 */
+ 	public void loadLayoutConfig() {
+-		// TODO Auto-generated method stub
+-		
++		Scanner inFile;
++    	try {
++    		inFile = new Scanner(new File(csv));
++    	} catch(FileNotFoundException err) {
++    		System.out.println("Input file for board not found");
++    		return;
++    	}
++    	int currentLine = 0;
++    	
++    	
++    	while (inFile.hasNextLine()) {
++    	     symbolGrid[currentLine] = inFile.nextLine().split(",");
++    	     currentLine++;
++    	}
++    	
++    	inFile.close();
++    	
++    	//set labels for all cells after files are read in
++    	for(int i = 0; i < NUM_ROWS; i++) {
++    		for(int j = 0; j < NUM_COLS; j++) {
++    			BoardCell cell = grid[i][j];
++    			cell.setLabel(symbolGrid[i][j]);
++    			if(cell.isLabel()) {
++    				symbolRoomMap.get(cell.getLabel().charAt(0)).setLabelCell(cell);
++    			}
++    			if(cell.isRoomCenter()) {
++    				symbolRoomMap.get(cell.getLabel().charAt(0)).setCenterCell(cell);
++    			}
++    		}
++    	}
++	}
++
++	/*
++	 * returns room associated with a cell, if one exists
++	 * otherwise, returns null
++	 */
++	public Room getRoom(BoardCell cell) {
++		String label = symbolGrid[cell.getRow()][cell.getCol()];
++		for(Map.Entry<Character, Room> pair : symbolRoomMap.entrySet()) {
++			if(label.charAt(0) == pair.getValue().getLabel())
++				return pair.getValue();
++		}
++		return null;
+ 	}
+ }
+diff --git a/src/clueGame/BoardCell.java b/src/clueGame/BoardCell.java
+index d2990fe..d1787f5 100644
+--- a/src/clueGame/BoardCell.java
++++ b/src/clueGame/BoardCell.java
+@@ -6,11 +6,12 @@ import java.util.Set;
+ import Experiment.TestBoardCell;
+ 
+ public class BoardCell {
+-	private Set<TestBoardCell> adjList = new HashSet<TestBoardCell>();
++	private Set<BoardCell> adjList = new HashSet<BoardCell>();
+ 	private int row;
+ 	private int col;
+ 	private boolean isRoom;
+ 	private boolean isOccupied;
++	private String symbol;
+ 
+ 	
+ 	public BoardCell(int row, int col) {
+@@ -18,14 +19,25 @@ public class BoardCell {
+ 		 this.col = col;
+ 	}
+ 	
+-	public void addAdjacency(TestBoardCell cell) {
+-		//adjList.add(cell);
++	public int getRow() {
++		return row;
++	}
++
++	public int getCol() {
++		return col;
++	}
++
++	/*
++	 * add cell to this cell's list of adjacent cells
++	 */
++	public void addAdjacency(BoardCell cell) {
++		adjList.add(cell);
+ 	}
+ 	
+ 	/*
+ 	 * returns list of cells adjacent to this cell
+ 	 */
+-	public Set<TestBoardCell> getAdjList() {
++	public Set<BoardCell> getAdjList() {
+ 		return adjList;
+ 	}
+ 	
+@@ -40,14 +52,24 @@ public class BoardCell {
+ 	 * returns true if this cell is part of a room
+ 	 */
+ 	public boolean getRoom() {
+-		return true;
++		//only return false when cell is walkway or unused
++		switch (symbol.charAt(0)) {
++		case 'W':
++			return false;
++		case 'X':
++			return false;
++		default:
++			return true;
++		}
++			
+ 	}
+ 	
+ 	/*
+ 	 * returns true if this cell is occupied by a player
+ 	 */
+ 	public boolean getOccupied() {
+-		return true;
++		//TODO
++		return false;
+ 	}
+ 	
+ 	/*
+@@ -57,85 +79,78 @@ public class BoardCell {
+ 		isOccupied = occu;
+ 	}
+ 
++	
++	/*
++	 * returns true if this cell is a doorway
++	 */
+ 	public boolean isDoorway() {
+-		//System.out.println(row + " " + col);
+-		
+-		Board board = Board.getInstance();
+-		//System.out.println(board.getCurrentLocation(row, col));
+-		if(board.getCurrentLocation(row, col).equals("W>") || board.getCurrentLocation(row, col).equals( "W^")
+-				|| board.getCurrentLocation(row, col).equals("W<") || board.getCurrentLocation(row, col).equals("Wv")) {
+-			//System.out.println("here");
+-			return true;
+-		}
+-		
+-		return false;
++		//check if label is W followed by another character
++		return symbol.charAt(0) == 'W' && symbol.length() > 1;
+ 	}
+ 
++	/*
++	 * returns the direction of doorway if this space is a doorway,
++	 * otherwise, returns null
++	 */
+ 	public DoorDirection getDoorDirection() {
+-		Board board = Board.getInstance();
+-		if(board.getCurrentLocation(row, col).equals("W>")) {
++		if(!this.isDoorway()) return null;
++		
++		//decide direction off of second character
++		switch(symbol.charAt(1)) {
++		case '>':
+ 			return DoorDirection.RIGHT;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("W<")) {
++		case '<':
+ 			return DoorDirection.LEFT;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("Wv")) {
++		case 'v':
+ 			return DoorDirection.DOWN;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("W^")) {
++		default:
+ 			return DoorDirection.UP;
+ 		}
+-
+-
+-
+-
+-		return DoorDirection.LEFT;
++		
+ 	}
+ 
+ 	public boolean isLabel() {
+-		Board board = Board.getInstance();
+-		if(board.getCurrentLocation(row, col).length() > 1) {
++		//get second character if present
++		char secondChar = ' ';
++		if(symbol.length() > 1)
++			secondChar = symbol.charAt(1);
++		
++		//return true if second character is a pound sign
++		if(secondChar == '#')
+ 			return true;
+-		}
++		
+ 		return false;
+ 	}
+ 
+ 	public boolean isRoomCenter() {
+-		Board board = Board.getInstance();
+-		if(board.getCurrentLocation(row, col).equals("K*")) {
+-			return true;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("O*")) {
+-			return true;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("B*")) {
+-			return true;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("S*")) {
+-			return true;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("H*")) {
+-			return true;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("R*")) {
+-			return true;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("D*")) {
+-			return true;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("C*")) {
+-			return true;
+-		}
+-		else if(board.getCurrentLocation(row, col).equals("L*")) {
++		//get second character if present
++		char secondChar = ' ';
++		if(symbol.length() > 1)
++			secondChar = symbol.charAt(1);
++		
++		//return true if second character is an asterisk
++		if(secondChar == '*')
+ 			return true;
+-		}
+ 		
+ 		return false;
+ 	}
+ 
++	/*
++	 * returns character representing room secret a secret passage goes to,
++	 * if this cell is a secret passage
++	 */
+ 	public char getSecretPassage() {
+-		// TODO Auto-generated method stub
+-		return 0;
++		if(symbol.length() <= 1)
++			return 0;
++		return symbol.charAt(1);
++	}
++
++	public void setLabel(String symbol) {
++		this.symbol = symbol;
++	}
++
++	public String getLabel() {
++		return symbol;
+ 	}
+ 
+ 	
+diff --git a/src/clueGame/Room.java b/src/clueGame/Room.java
+index 4670d94..2cd8e8b 100644
+--- a/src/clueGame/Room.java
++++ b/src/clueGame/Room.java
+@@ -2,31 +2,39 @@ package clueGame;
+ 
+ public class Room {
+ 	
+-	private String name = "";
+-	private int row = 0;
+-	private int col = 0;
++	private String name;
++	private char label;
+ 	
+-	public Room() {
+-		super();
+-	}
++	private BoardCell centerCell;
++	private BoardCell labelCell;
+ 	
+-	public Room(String name) {
++	public Room(String name, char label) {
+ 		this.name = name;
++		this.label = label;
++	}
++	
++	public void setLabelCell(BoardCell cell) {
++		this.labelCell = cell;
++	}
++	
++	public void setCenterCell(BoardCell cell) {
++		this.centerCell = cell;
+ 	}
+ 
+ 	public String getName() {
+-		
+ 		return name;
+ 	}
+ 
+ 	public BoardCell getCenterCell() {
+-		// TODO Auto-generated method stub
+-		return null;
++		return centerCell;
+ 	}
+ 
+ 	public BoardCell getLabelCell() {
+-		// TODO Auto-generated method stub
+-		return new BoardCell(2, 21);
++		return labelCell;
++	}
++
++	public char getLabel() {
++		return label;
+ 	}
+ 
+ }
+diff --git a/src/tests/ExceptionTests.java b/src/tests/ExceptionTests.java
+new file mode 100644
+index 0000000..d2696f0
+--- /dev/null
++++ b/src/tests/ExceptionTests.java
+@@ -0,0 +1,52 @@
++package tests;
++
++/*
++ * This program tests that, when loading config files, exceptions 
++ * are thrown appropriately.
++ */
++
++import java.io.FileNotFoundException;
++
++import org.junit.Test;
++import clueGame.BadConfigFormatException;
++import clueGame.Board;
++
++public class ExceptionTests {
++
++	// Test that an exception is thrown for a config file that does not
++	// have the same number of columns for each row
++	@Test(expected = BadConfigFormatException.class)
++	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
++		// Note that we are using a LOCAL Board variable, because each
++		// test will load different files
++		Board board = Board.getInstance();
++		board.setConfigFiles("ClueLayoutBadColumns306.csv", "ClueSetup306.txt");
++		// Instead of initialize, we call the two load functions directly.
++		// This is necessary because initialize contains a try-catch.
++		board.loadSetupConfig();
++		// This one should throw an exception
++		board.loadLayoutConfig();
++	}
++
++	// Test that an exception is thrown for a config file that specifies
++	// a room that is not in the legend. See first test for other important
++	// comments.
++	@Test(expected = BadConfigFormatException.class)
++	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
++		Board board = Board.getInstance();
++		board.setConfigFiles("ClueLayoutBadRoom306.csv", "ClueSetup306.txt");
++		board.loadSetupConfig();
++		board.loadLayoutConfig();
++	}
++
++	// Test that an exception is thrown for a config file with a room type
++	// that is not Card or Other
++	@Test(expected = BadConfigFormatException.class)
++	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
++		Board board = Board.getInstance();
++		board.setConfigFiles("ClueLayout306.csv", "ClueSetupBadFormat306.txt");
++		board.loadSetupConfig();
++		board.loadLayoutConfig();
++	}
++
++}
+diff --git a/src/tests/FileInitTests.java b/src/tests/FileInitTests.java
+index d224e8b..ac12908 100644
+--- a/src/tests/FileInitTests.java
++++ b/src/tests/FileInitTests.java
+@@ -37,14 +37,9 @@ public class FileInitTests {
+ 		// Board is singleton, get the only instance
+ 		board = Board.getInstance();
+ 		// set the file names to use my config files
+-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
++		board.setConfigFiles("data/ClueLayout.csv", "data/ClueSetup.txt");
+ 		// Initialize will load BOTH config files
+-		try {
+-			board.initialize();
+-		} catch (IOException e) {
+-			// TODO Auto-generated catch block
+-			e.printStackTrace();
+-		}
++		board.initialize();
+ 	}
+ 
+ 	@Test
+@@ -120,7 +115,7 @@ public class FileInitTests {
+ 		assertTrue( room != null );
+ 		assertEquals( room.getName(), "Lounge" ) ;
+ 		assertTrue( cell.isLabel() );
+-		assertTrue( room.getLabelCell() == cell ); //DOESNT PASS
++		assertTrue( room.getLabelCell() == cell );
+ 		
+ 		// this is a room center cell to test
+ 		cell = board.getCell(21, 8);
+@@ -128,14 +123,14 @@ public class FileInitTests {
+ 		assertTrue( room != null );
+ 		assertEquals( room.getName(), "Ballroom" ) ;
+ 		assertTrue( cell.isRoomCenter() );
+-		assertTrue( room.getCenterCell() == cell ); //DOESNT PASS
++		assertTrue( room.getCenterCell() == cell );
+ 		
+ 		// this is a secret passage test
+ 		cell = board.getCell(0, 0);
+ 		room = board.getRoom( cell ) ;
+ 		assertTrue( room != null );
+-		assertEquals( room.getName(), "Kitchen" ) ; //DOESNT PASS
+-		assertTrue( cell.getSecretPassage() == 'K' ); //DOESNT PASS
++		assertEquals( room.getName(), "Study" );
++		assertTrue( cell.getSecretPassage() == 'O' );
+ 		
+ 		// test a walkway
+ 		cell = board.getCell(5, 0);
